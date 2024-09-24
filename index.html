@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디핵 생일 축하 페이지</title>
+    <style>
+        body {
+            background-color: #ff66ff; /* 밝은 분홍 배경 */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            color: #fff700; /* 밝은 노란 텍스트 */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px #ff0000; /* 붉은 그림자 */
+            margin-top: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                color: #fff700;
+            }
+            50% {
+                transform: scale(1.1);
+                color: #00ff00; /* 애니메이션 중간에 색 변환 */
+            }
+            100% {
+                transform: scale(1);
+                color: #fff700;
+            }
+        }
+
+        .balloons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .balloon {
+            width: 80px;
+            height: 120px;
+            background-color: #ff0000; /* 빨간색 풍선 */
+            border-radius: 50% 50% 50% 50%;
+            margin: 10px;
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(2) {
+            background-color: #00ff00; /* 녹색 풍선 */
+            animation-duration: 5s;
+        }
+
+        .balloon:nth-child(3) {
+            background-color: #0000ff; /* 파란색 풍선 */
+            animation-duration: 6s;
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 40px;
+            background-color: #999;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .message {
+            font-size: 2em;
+            background: #00ccff;
+            color: #ff0000;
+            padding: 20px;
+            margin-top: 30px;
+            border: 5px dashed #fff700;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 1.5em;
+            background-color: #00ff00;
+            padding: 10px;
+            color: #ff00ff;
+            border-top: 10px dotted #ff0000;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎉 디핵 생일 축하해요! 🎉</h1>
+
+    <div class="balloons">
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+    </div>
+
+    <div class="message">
+        디핵님의 특별한 날을 위해!<br>
+        앞으로도 멋진 음악 기대할게요!
+    </div>
+
+    <footer>
+        🎂 Happy D-Hack Day! 🎂
+    </footer>
+
+</body>
+</html>
