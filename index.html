@@ -217,19 +217,26 @@
 
     <div id="player"></div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // YouTube IFrame API를 비동기적으로 로드
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
         let player;
         let isPlayerReady = false;
         let pendingVideoId = null;
 
         function onYouTubeIframeAPIReady() {
+            console.log('YouTube IFrame API Ready');
             player = new YT.Player('player', {
                 height: '0',
                 width: '0',
                 videoId: 'XxfFvVA7GQE',
                 events: {
-                    'onReady': onPlayerReady
+                    'onReady': onPlayerReady,
+                    'onError': onPlayerError
                 },
                 playerVars: {
                     'autoplay': 0,
@@ -246,6 +253,7 @@
         }
 
         function onPlayerReady(event) {
+            console.log('Player Ready');
             isPlayerReady = true;
             if (pendingVideoId) {
                 playVideo(pendingVideoId);
@@ -253,16 +261,23 @@
             }
         }
 
+        function onPlayerError(event) {
+            console.error('Player Error:', event.data);
+        }
+
         function playVideo(videoId) {
+            console.log('Attempting to play video:', videoId);
             if (isPlayerReady) {
                 player.loadVideoById(videoId);
                 player.playVideo();
             } else {
+                console.log('Player not ready, queueing video:', videoId);
                 pendingVideoId = videoId;
             }
         }
 
         function showPhoto(photoSrc, videoId) {
+            console.log('Show Photo:', photoSrc, 'Video ID:', videoId);
             const photoContainer = document.querySelector('.photo-container');
             const photo = photoContainer.querySelector('.photo');
             
