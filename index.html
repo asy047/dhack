@@ -12,7 +12,8 @@
             color: #fff700; /* 밝은 노란 텍스트 */
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow-y: scroll;
+            overflow-x: hidden;
         }
 
         h1 {
@@ -100,7 +101,7 @@
             object-fit: cover;
             border: 10px solid #00ff00;
             box-shadow: 0 0 20px #ff00ff;
-            animation: spin 3s linear infinite;
+            animation: spin 5s linear infinite;
         }
 
         @keyframes spin {
@@ -176,9 +177,9 @@
 
         /* YouTube 플레이어를 화면에 보이지 않게 */
         #player {
-            display: none;
-            width: 0;
-            height: 0;
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
         }
     </style>
 </head>
@@ -214,26 +215,35 @@
         🎂 Happy D-Hack Day! 🎂
     </footer>
 
-    <!-- YouTube 동영상 플레이어 -->
     <div id="player"></div>
 
-    <!-- YouTube IFrame API 삽입 -->
     <script src="https://www.youtube.com/iframe_api"></script>
-
     <script>
         let player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '0',
                 width: '0',
+                videoId: 'XxfFvVA7GQE',
                 events: {
                     'onReady': onPlayerReady
+                },
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'showinfo': 0,
+                    'modestbranding': 1,
+                    'loop': 1,
+                    'fs': 0,
+                    'cc_load_policy': 0,
+                    'iv_load_policy': 3,
+                    'autohide': 0
                 }
             });
         }
 
         function onPlayerReady(event) {
-            // 플레이어 준비 후 동영상 재생 준비 상태
+            // 플레이어 준비 완료
         }
 
         function showPhoto(photoSrc, videoId) {
@@ -246,20 +256,18 @@
             // 스파클 효과 발생
             createSparkles();
 
-            // YouTube 동영상 재생 (videoId가 있을 경우에만)
-            if (videoId) {
-                player.loadVideoById(videoId);
-                player.playVideo();
-            }
+            // YouTube 음원 재생
+            player.loadVideoById(videoId);
+            player.playVideo();
 
-            // 3초 후에 사진 숨기기
+            // 3초 후에 사진만 숨기기
             setTimeout(() => {
                 photoContainer.style.display = 'none';
             }, 3000);
         }
 
         function createSparkles() {
-            const numberOfSparkles = 100; // 스파클의 개수
+            const numberOfSparkles = 100;
             for (let i = 0; i < numberOfSparkles; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.classList.add('sparkles');
@@ -267,7 +275,6 @@
                 sparkle.style.top = `${Math.random() * window.innerHeight}px`;
                 document.body.appendChild(sparkle);
 
-                // 스파클을 1초 후 제거
                 setTimeout(() => {
                     sparkle.remove();
                 }, 1000);
