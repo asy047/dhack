@@ -51,6 +51,7 @@
             margin: 10px;
             position: relative;
             animation: float 4s ease-in-out infinite;
+            cursor: pointer;
         }
 
         .balloon:nth-child(2) {
@@ -83,6 +84,45 @@
             }
             100% {
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: radial-gradient(circle, red, orange, yellow, green, blue, purple);
+            background-size: cover;
+            display: none;
+            animation: sparkle 0.8s linear forwards, changeColor 0.8s linear forwards;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+        }
+
+        @keyframes changeColor {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
             }
         }
 
@@ -130,9 +170,9 @@
     <h1>🎉 디핵 생일 축하해요! 🎉</h1>
 
     <div class="balloons">
-        <div class="balloon"></div>
-        <div class="balloon"></div>
-        <div class="balloon"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
     </div>
 
     <div class="message">
@@ -143,6 +183,36 @@
     <footer>
         🎂 Happy D-Hack Day! 🎂
     </footer>
+
+    <!-- 팝 소리 파일 -->
+    <audio id="popSound" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+
+    <script>
+        function popBalloon(balloon) {
+            // 풍선 터트리기 애니메이션 추가
+            balloon.style.animation = 'pop 0.5s forwards';
+
+            // 소리 재생
+            const popSound = document.getElementById('popSound');
+            popSound.play();
+
+            // 스파클 추가
+            const sparkles = document.createElement('div');
+            sparkles.classList.add('sparkles');
+            sparkles.style.left = balloon.offsetLeft + 'px';
+            sparkles.style.top = balloon.offsetTop + 'px';
+            document.body.appendChild(sparkles);
+            sparkles.style.display = 'block';
+
+            // 풍선 터진 후 제거
+            setTimeout(() => {
+                balloon.style.display = 'none';
+                setTimeout(() => {
+                    sparkles.remove(); // 스파클 제거
+                }, 800); // 스파클 애니메이션 시간 후 제거
+            }, 500);
+        }
+    </script>
 
 </body>
 </html>
