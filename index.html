@@ -185,7 +185,7 @@
     </footer>
 
     <!-- 팝 소리 파일 -->
-    <audio id="popSound" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+    <audio id="popSound" src="https://www.soundjay.com/button/sounds/button-16.mp3" preload="auto"></audio>
 
     <script>
         function popBalloon(balloon) {
@@ -194,6 +194,7 @@
 
             // 소리 재생
             const popSound = document.getElementById('popSound');
+            popSound.currentTime = 0;  // 사운드를 재시작
             popSound.play();
 
             // 스파클 추가
