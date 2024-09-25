@@ -22,6 +22,12 @@
             animation: pulse 1.5s infinite;
         }
 
+        .instruction {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #ff0000;
+        }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -44,35 +50,25 @@
         }
 
         .balloon {
-            width: 80px;
-            height: 120px;
-            background-color: #ff0000; /* 빨간색 풍선 */
-            border-radius: 50% 50% 50% 50%;
+            width: 150px;
+            height: 150px;
             margin: 10px;
-            position: relative;
-            animation: float 4s ease-in-out infinite;
             cursor: pointer;
+            animation: float 4s ease-in-out infinite;
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #ff00ff;
         }
 
-        .balloon:nth-child(2) {
-            background-color: #00ff00; /* 녹색 풍선 */
-            animation-duration: 5s;
+        .balloon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .balloon:nth-child(3) {
-            background-color: #0000ff; /* 파란색 풍선 */
-            animation-duration: 6s;
-        }
-
-        .balloon::before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 40px;
-            background-color: #999;
-            top: 120px;
-            left: 50%;
-            transform: translateX(-50%);
+        .balloon:hover {
+            transform: scale(1.1);
         }
 
         @keyframes float {
@@ -87,42 +83,35 @@
             }
         }
 
-        @keyframes pop {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(0);
-            }
-        }
-
-        .sparkles {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background-image: radial-gradient(circle, red, orange, yellow, green, blue, purple);
-            background-size: cover;
+        .photo-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
             display: none;
-            animation: sparkle 0.8s linear forwards, changeColor 0.8s linear forwards;
+            z-index: 1000;
         }
 
-        @keyframes sparkle {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1.5);
-            }
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 10px solid #00ff00;
+            box-shadow: 0 0 20px #ff00ff;
+            animation: spin 3s linear infinite;
         }
 
-        @keyframes changeColor {
+        @keyframes spin {
             0% {
-                filter: hue-rotate(0deg);
+                transform: rotate(0deg) scale(0);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.2);
             }
             100% {
-                filter: hue-rotate(360deg);
+                transform: rotate(360deg) scale(1);
             }
         }
 
@@ -163,16 +152,57 @@
                 transform: translateY(-10px);
             }
         }
+
+        /* 스파클 스타일 */
+        .sparkles {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: sparkleAnimation 1s ease-out forwards;
+        }
+
+        @keyframes sparkleAnimation {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* YouTube 플레이어를 화면에 보이지 않게 */
+        #player {
+            display: none;
+            width: 0;
+            height: 0;
+        }
     </style>
 </head>
 <body>
-
     <h1>🎉 디핵 생일 축하해요! 🎉</h1>
+    
+    <div class="instruction">
+        사진을 클릭해보세요!
+    </div>
 
     <div class="balloons">
-        <div class="balloon" onclick="popBalloon(this)"></div>
-        <div class="balloon" onclick="popBalloon(this)"></div>
-        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="showPhoto('1.jpeg', 'XxfFvVA7GQE')">
+            <img src="https://image.yes24.com/goods/92427218/XL" alt="디핵 사진 1">
+        </div>
+        <div class="balloon" onclick="showPhoto('2.jpeg', 'KCpWMEsiN3Q')">
+            <img src="https://i.namu.wiki/i/_zkVWOGfkFSp97jRuygcH3-H6l4GaehVmH-DhEIYGQjIcIf_cWG-yo0sDbVie6ohK_BIkWz8NZhD36DlzTE4h1HOtySffkjyV4-icnHjJ_iF409xTMTRDAQYbzk_rRJXj8fDtRSNOIhZ1nC0_MpeKQ.webp" alt="디핵 사진 2">
+        </div>
+        <div class="balloon" onclick="showPhoto('3.jpeg', 'vdHr1sXmY7E')">
+            <img src="https://i.namu.wiki/i/dU85bxqScOsd5cEUu6x4mz85WsuZ-rM_sG_MXW-4hp-YJ_aVqCmTjPgr3y-4qeOBY1w_SoumPPVto8jJHl-zBUFUT4BQzTCmb7Z22CTg3R6aaPy4rXOKycGpoS4SzUggC0D8SPXpxJaUXFXiVqXAXQ.webp" alt="디핵 사진 3">
+        </div>
+    </div>
+
+    <div class="photo-container">
+        <img src="" alt="디핵 사진" class="photo">
     </div>
 
     <div class="message">
@@ -184,36 +214,65 @@
         🎂 Happy D-Hack Day! 🎂
     </footer>
 
-    <!-- 팝 소리 파일 -->
-    <audio id="popSound" src="https://www.soundjay.com/button/sounds/button-16.mp3" preload="auto"></audio>
+    <!-- YouTube 동영상 플레이어 -->
+    <div id="player"></div>
+
+    <!-- YouTube IFrame API 삽입 -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
-        function popBalloon(balloon) {
-            // 풍선 터트리기 애니메이션 추가
-            balloon.style.animation = 'pop 0.5s forwards';
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
 
-            // 소리 재생
-            const popSound = document.getElementById('popSound');
-            popSound.currentTime = 0;  // 사운드를 재시작
-            popSound.play();
+        function onPlayerReady(event) {
+            // 플레이어 준비 후 동영상 재생 준비 상태
+        }
 
-            // 스파클 추가
-            const sparkles = document.createElement('div');
-            sparkles.classList.add('sparkles');
-            sparkles.style.left = balloon.offsetLeft + 'px';
-            sparkles.style.top = balloon.offsetTop + 'px';
-            document.body.appendChild(sparkles);
-            sparkles.style.display = 'block';
+        function showPhoto(photoSrc, videoId) {
+            const photoContainer = document.querySelector('.photo-container');
+            const photo = photoContainer.querySelector('.photo');
+            
+            photo.src = photoSrc;
+            photoContainer.style.display = 'block';
 
-            // 풍선 터진 후 제거
+            // 스파클 효과 발생
+            createSparkles();
+
+            // YouTube 동영상 재생 (videoId가 있을 경우에만)
+            if (videoId) {
+                player.loadVideoById(videoId);
+                player.playVideo();
+            }
+
+            // 3초 후에 사진 숨기기
             setTimeout(() => {
-                balloon.style.display = 'none';
+                photoContainer.style.display = 'none';
+            }, 3000);
+        }
+
+        function createSparkles() {
+            const numberOfSparkles = 100; // 스파클의 개수
+            for (let i = 0; i < numberOfSparkles; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkles');
+                sparkle.style.left = `${Math.random() * window.innerWidth}px`;
+                sparkle.style.top = `${Math.random() * window.innerHeight}px`;
+                document.body.appendChild(sparkle);
+
+                // 스파클을 1초 후 제거
                 setTimeout(() => {
-                    sparkles.remove(); // 스파클 제거
-                }, 800); // 스파클 애니메이션 시간 후 제거
-            }, 500);
+                    sparkle.remove();
+                }, 1000);
+            }
         }
     </script>
-
 </body>
 </html>
