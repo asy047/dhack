@@ -220,6 +220,9 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         let player;
+        let isPlayerReady = false;
+        let pendingVideoId = null;
+
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '0',
@@ -243,7 +246,20 @@
         }
 
         function onPlayerReady(event) {
-            // 플레이어 준비 완료
+            isPlayerReady = true;
+            if (pendingVideoId) {
+                playVideo(pendingVideoId);
+                pendingVideoId = null;
+            }
+        }
+
+        function playVideo(videoId) {
+            if (isPlayerReady) {
+                player.loadVideoById(videoId);
+                player.playVideo();
+            } else {
+                pendingVideoId = videoId;
+            }
         }
 
         function showPhoto(photoSrc, videoId) {
@@ -257,8 +273,7 @@
             createSparkles();
 
             // YouTube 음원 재생
-            player.loadVideoById(videoId);
-            player.playVideo();
+            playVideo(videoId);
 
             // 3초 후에 사진만 숨기기
             setTimeout(() => {
