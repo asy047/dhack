@@ -6,50 +6,35 @@
     <title>디핵 생일 축하 페이지</title>
     <style>
         body {
-            background-color: #ff66ff; /* 밝은 분홍 배경 */
+            background-color: #ff66ff;
             font-family: 'Comic Sans MS', cursive, sans-serif;
             text-align: center;
-            color: #fff700; /* 밝은 노란 텍스트 */
+            color: #fff700;
             margin: 0;
             padding: 0;
             overflow-y: scroll;
-            overflow-x: hidden;
         }
-
         h1 {
             font-size: 3em;
-            text-shadow: 2px 2px 4px #ff0000; /* 붉은 그림자 */
+            text-shadow: 2px 2px 4px #ff0000;
             margin-top: 20px;
             animation: pulse 1.5s infinite;
         }
-
         .instruction {
             font-size: 1.5em;
             margin-top: 10px;
             color: #ff0000;
         }
-
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-                color: #fff700;
-            }
-            50% {
-                transform: scale(1.1);
-                color: #00ff00; /* 애니메이션 중간에 색 변환 */
-            }
-            100% {
-                transform: scale(1);
-                color: #fff700;
-            }
+            0% { transform: scale(1); color: #fff700; }
+            50% { transform: scale(1.1); color: #00ff00; }
+            100% { transform: scale(1); color: #fff700; }
         }
-
         .balloons {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
         }
-
         .balloon {
             width: 150px;
             height: 150px;
@@ -61,29 +46,18 @@
             overflow: hidden;
             border: 5px solid #ff00ff;
         }
-
         .balloon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .balloon:hover {
             transform: scale(1.1);
         }
-
         @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
-
         .photo-container {
             position: fixed;
             top: 50%;
@@ -94,28 +68,19 @@
             display: none;
             z-index: 1000;
         }
-
         .photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border: 10px solid #00ff00;
             box-shadow: 0 0 20px #ff00ff;
-            animation: spin 5s linear infinite;
+            animation: spin 3s linear infinite;
         }
-
         @keyframes spin {
-            0% {
-                transform: rotate(0deg) scale(0);
-            }
-            50% {
-                transform: rotate(180deg) scale(1.2);
-            }
-            100% {
-                transform: rotate(360deg) scale(1);
-            }
+            0% { transform: rotate(0deg) scale(0); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
         }
-
         .message {
             font-size: 2em;
             background: #00ccff;
@@ -125,16 +90,10 @@
             border: 5px dashed #fff700;
             animation: blink 1s infinite;
         }
-
         @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
-
         footer {
             margin-top: 40px;
             font-size: 1.5em;
@@ -144,17 +103,10 @@
             border-top: 10px dotted #ff0000;
             animation: bounce 2s infinite;
         }
-
         @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-
-        /* 스파클 스타일 */
         .sparkles {
             position: absolute;
             width: 10px;
@@ -163,23 +115,9 @@
             border-radius: 50%;
             animation: sparkleAnimation 1s ease-out forwards;
         }
-
         @keyframes sparkleAnimation {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(3);
-                opacity: 0;
-            }
-        }
-
-        /* YouTube 플레이어를 화면에 보이지 않게 */
-        #player {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
         }
     </style>
 </head>
@@ -191,13 +129,13 @@
     </div>
 
     <div class="balloons">
-        <div class="balloon" onclick="showPhoto('1.jpeg', 'XxfFvVA7GQE')">
+        <div class="balloon" onclick="showPhoto('1.jpeg', '1.mp3')">
             <img src="https://image.yes24.com/goods/92427218/XL" alt="디핵 사진 1">
         </div>
-        <div class="balloon" onclick="showPhoto('2.jpeg', 'KCpWMEsiN3Q')">
+        <div class="balloon" onclick="showPhoto('2.jpeg', '2.mp3')">
             <img src="https://i.namu.wiki/i/_zkVWOGfkFSp97jRuygcH3-H6l4GaehVmH-DhEIYGQjIcIf_cWG-yo0sDbVie6ohK_BIkWz8NZhD36DlzTE4h1HOtySffkjyV4-icnHjJ_iF409xTMTRDAQYbzk_rRJXj8fDtRSNOIhZ1nC0_MpeKQ.webp" alt="디핵 사진 2">
         </div>
-        <div class="balloon" onclick="showPhoto('3.jpeg', 'vdHr1sXmY7E')">
+        <div class="balloon" onclick="showPhoto('3.jpeg', '3.mp3')">
             <img src="https://i.namu.wiki/i/dU85bxqScOsd5cEUu6x4mz85WsuZ-rM_sG_MXW-4hp-YJ_aVqCmTjPgr3y-4qeOBY1w_SoumPPVto8jJHl-zBUFUT4BQzTCmb7Z22CTg3R6aaPy4rXOKycGpoS4SzUggC0D8SPXpxJaUXFXiVqXAXQ.webp" alt="디핵 사진 3">
         </div>
     </div>
@@ -215,85 +153,38 @@
         🎂 Happy D-Hack Day! 🎂
     </footer>
 
-    <div id="player"></div>
+    <audio id="audioPlayer"></audio>
 
     <script>
-        // YouTube IFrame API를 비동기적으로 로드
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        let currentAudio = null;
 
-        let player;
-        let isPlayerReady = false;
-        let pendingVideoId = null;
-
-        function onYouTubeIframeAPIReady() {
-            console.log('YouTube IFrame API Ready');
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'XxfFvVA7GQE',
-                events: {
-                    'onReady': onPlayerReady,
-                    'onError': onPlayerError
-                },
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'showinfo': 0,
-                    'modestbranding': 1,
-                    'loop': 1,
-                    'fs': 0,
-                    'cc_load_policy': 0,
-                    'iv_load_policy': 3,
-                    'autohide': 0
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            console.log('Player Ready');
-            isPlayerReady = true;
-            if (pendingVideoId) {
-                playVideo(pendingVideoId);
-                pendingVideoId = null;
-            }
-        }
-
-        function onPlayerError(event) {
-            console.error('Player Error:', event.data);
-        }
-
-        function playVideo(videoId) {
-            console.log('Attempting to play video:', videoId);
-            if (isPlayerReady) {
-                player.loadVideoById(videoId);
-                player.playVideo();
-            } else {
-                console.log('Player not ready, queueing video:', videoId);
-                pendingVideoId = videoId;
-            }
-        }
-
-        function showPhoto(photoSrc, videoId) {
-            console.log('Show Photo:', photoSrc, 'Video ID:', videoId);
+        function showPhoto(photoSrc, audioSrc) {
+            console.log('Show Photo:', photoSrc, 'Audio:', audioSrc);
             const photoContainer = document.querySelector('.photo-container');
             const photo = photoContainer.querySelector('.photo');
             
             photo.src = photoSrc;
             photoContainer.style.display = 'block';
 
-            // 스파클 효과 발생
             createSparkles();
 
-            // YouTube 음원 재생
-            playVideo(videoId);
+            playAudio(audioSrc);
 
-            // 3초 후에 사진만 숨기기
             setTimeout(() => {
                 photoContainer.style.display = 'none';
             }, 3000);
+        }
+
+        function playAudio(audioSrc) {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = audioSrc;
+            audioPlayer.play().catch(e => console.error('Audio play failed:', e));
+            currentAudio = audioPlayer;
         }
 
         function createSparkles() {
